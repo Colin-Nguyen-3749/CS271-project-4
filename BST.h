@@ -40,6 +40,14 @@ class BST {
 
     std::string to_string (void) const {
         std::stringstream s;
+
+        for (int i = 0; i < size - 1; i++) {
+            s << list[i] << " ";
+        }
+        if (size != 0) {
+            s << list[size - 1];
+        }
+        return s.str();
     }
 
 
