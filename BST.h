@@ -37,6 +37,7 @@ class BST {
     D min_data (void);
     K min_key (void);
     K successor (const K& key);
+    void trim(K low, K high);
 
     std::string to_string (void) const {
         std::stringstream s;
