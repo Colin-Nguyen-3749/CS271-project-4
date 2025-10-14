@@ -15,3 +15,34 @@
 #define BST_H
 
 using namespace std;
+
+template <typename D, typename K>
+class BST {
+
+    D data;
+    K key;
+
+    public:
+
+    BST(void);
+    BST(const D& data, const K& key);
+    ~BST(void);
+
+    bool empty (void);
+    void insert (const D& data, const K& key);
+    D get (const K& key);
+    void remove (const K& key);
+    D max_data (void);
+    K max_key (void);
+    D min_data (void);
+    K min_key (void);
+    K successor (const K& key);
+
+
+    private:
+
+};
+
+#include "BST.cpp"
+
+#endif
