@@ -38,6 +38,11 @@ class BST {
     K min_key (void);
     K successor (const K& key);
 
+    std::string to_string (void) const {
+        std::stringstream s;
+    }
+
+
 
     private:
 
