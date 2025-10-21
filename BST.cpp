@@ -17,7 +17,10 @@ using namespace std;
 //===========================================
 template <typename D, typename K> 
 BST<D, K>::BST() {
-
+    parent = nullptr;
+	root = nullptr;
+    right = nullptr;
+    left = nullptr;
 }
 
 //===========================================
