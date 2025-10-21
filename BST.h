@@ -40,7 +40,7 @@ class BST {
 
     bool empty (void);
     void insert (const D& data, const K& key);
-    // D get (const K& key);
+    D get (const K& key);
     // void remove (const K& key);
     // D max_data (void);
     // K max_key (void);

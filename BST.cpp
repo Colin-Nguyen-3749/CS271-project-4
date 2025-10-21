@@ -8,6 +8,7 @@
 
 #include "BST.h"
 #include <iostream>
+#include <stdexcept>
 #include <stdlib.h>
 
 using namespace std;
@@ -83,6 +84,21 @@ void BST<D, K>::insert(const D& data, const K& key) {
 //===========================================
 template <typename D, typename K>
 D BST<D, K>::get(const K& key) {
+    
+    // initialize Node pointer x for BST traversal
+    Node* x = root;
+
+    while (x != nullptr && x->key != key) { // while we haven't found our key or reached a leaf node
+        if (key < x->key) { x = x->left; } // left subtree traversal
+        else { x = x->right; } // right subtree traversal
+    }
+
+    if (x->key != key) { // if the key wasn't found in the BST, throw an error
+        throw std::runtime_error("key doesn't exsist within BST.");
+    }
+
+    // return data associated with key
+    return x->data;
 
 }
 
