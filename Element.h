@@ -32,7 +32,7 @@ public:
     Element(D data, K key);
     K get_key();
     D get_data();
-    std::string to_str() const;
+    std::string to_string() const;
     
 
 private:

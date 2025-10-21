@@ -70,7 +70,7 @@ template <typename D, typename K> K Element<D, K>::get_key(void) {
 // RETURN VALUE:
 // the T data of an element
 //============================================
-template <typename D, typename K> D Element<T>::get_data(void) {
+template <typename D, typename K> D Element<D, K>::get_data(void) {
 
     return instance->data;
 }
@@ -83,7 +83,7 @@ template <typename D, typename K> D Element<T>::get_data(void) {
 // RETURN VALUE:
 // a string of an element
 //============================================
-template <typename D, typename K> std::string Element<D, K>::to_str(void) const {
+template <typename D, typename K> std::string Element<D, K>::to_string(void) const {
     std::stringstream s;
 
     s << "(" << instance->data << "," << instance->key << ")";
