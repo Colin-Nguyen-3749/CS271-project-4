@@ -107,7 +107,25 @@ D BST<D, K>::get(const K& key) {
 //===========================================
 template <typename D, typename K>
 void BST<D, K>::remove(const K& key) {
-    
+
+    /*
+    Node* x = root;
+
+    while (x != nullptr && x->key != key) {
+        if (key < x->key) { x = x->left; }
+        else { x = x->right; }
+    }
+
+    if (x->key != key) {
+        throw std::runtime_error("Key doesn't exist within BST.")
+    }
+
+    if (x->parent->left->key == key) { x->parent->left = x->; }
+    else { x->parent->right = x->; }
+
+    ~x;
+    */
+
 }
 
 //===========================================
