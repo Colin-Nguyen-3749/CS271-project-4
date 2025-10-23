@@ -10,6 +10,7 @@
 #include <sstream>
 #include <stdlib.h>
 #include <string> 
+#include <vector>
 
 #ifndef BST_H
 #define BST_H
@@ -35,22 +36,14 @@ class BST {
     // K min_key (void);
     // K successor (const K& key);
     // void trim(K low, K high);
-    void inorder_tree_walk(std::stringstream result, Node* x); // we might not need this
+    // void inorder_tree_walk(std::stringstream result, Node* x); // we might not need this
 
 
-    std::string to_string (void) const {
-        std::stringstream s;
-
-        inorder_tree_walk(s, root);
-
-        return s.str();
-    };
+    std::string to_string (void) const;
 
     // use a queue to keep track of the parents and children that you saw
     // when we saw all children of the first item in the queue, remove it and then check the children of the other children in the queue
-    
-
-
+    // if a node has no kids then remove from the queue
 
     private:
 

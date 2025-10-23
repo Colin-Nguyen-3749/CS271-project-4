@@ -11,6 +11,7 @@
 #include <stdexcept>
 #include <stdlib.h>
 #include <sstream>
+#include <queue>
 
 using namespace std;
 
@@ -189,3 +190,38 @@ D BST<D, K>::get(const K& key) {
 //     }
 
 // }
+
+//===========================================
+// to_string
+//===========================================
+template <typename D, typename K> 
+std::string BST<D, K>::to_string(void) const {
+    std::stringstream s;
+
+    int checkKeys = 1;
+    std::queue<Node*> myQueue;
+    int toRemove = 0;
+
+    while(checkKeys != 0) {
+         
+        toRemove = checkKeys;
+        checkKeys = 0;
+        
+        while (toRemove !=0) {
+            Node* x = myQueue.front();
+            s << x->key << " ";
+            if (x->left != nullptr) {
+                checkKeys++;
+                myQueue.push(x->left);
+            }
+            if (x->right != nullptr) {
+                checkKeys++;
+                myQueue.push(x->right);
+            }
+            myQueue.pop();
+            toRemove--;
+        } 
+    }
+
+    return s.str();
+}
