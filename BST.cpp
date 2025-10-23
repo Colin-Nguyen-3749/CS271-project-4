@@ -10,6 +10,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <stdlib.h>
+#include <sstream>
 
 using namespace std;
 
@@ -39,10 +40,10 @@ BST<D, K>::BST(const D& data, const K& key) {
 //===========================================
 // Destructor
 //===========================================
-template <typename D, typename K>
-BST<D, K>::~BST() {
+// template <typename D, typename K>
+// BST<D, K>::~BST() {
     
-}
+// }
 
 //===========================================
 // empty
@@ -105,73 +106,86 @@ D BST<D, K>::get(const K& key) {
 //===========================================
 // remove
 //===========================================
-template <typename D, typename K>
-void BST<D, K>::remove(const K& key) {
+// template <typename D, typename K>
+// void BST<D, K>::remove(const K& key) {
 
-    /*
-    Node* x = root;
+    
+    // Node* x = root;
 
-    while (x != nullptr && x->key != key) {
-        if (key < x->key) { x = x->left; }
-        else { x = x->right; }
-    }
+    // while (x != nullptr && x->key != key) {
+    //     if (key < x->key) { x = x->left; }
+    //     else { x = x->right; }
+    // }
 
-    if (x->key != key) {
-        throw std::runtime_error("Key doesn't exist within BST.")
-    }
+    // if (x->key != key) {
+    //     throw std::runtime_error("Key doesn't exist within BST.")
+    // }
 
-    if (x->parent->left->key == key) { x->parent->left = x->; }
-    else { x->parent->right = x->; }
+    // if (x->parent->left->key == key) { x->parent->left = x->; }
+    // else { x->parent->right = x->; }
 
-    ~x;
-    */
+    // ~x;
+    
 
-}
+// }
 
 //===========================================
 // max_data
 //===========================================
-template <typename D, typename K>
-D BST<D, K>::max_data(void) {
+// template <typename D, typename K>
+// D BST<D, K>::max_data(void) {
 
-}
+// }
 
 //===========================================
 // max_key
 //===========================================
-template <typename D, typename K> 
-K BST<D, K>::max_key(void) {
+// template <typename D, typename K> 
+// K BST<D, K>::max_key(void) {
 
-}
+// }
 
 //===========================================
 // min_data
 //===========================================
-template <typename D, typename K>
-D BST<D, K>::min_data(void) {
+// template <typename D, typename K>
+// D BST<D, K>::min_data(void) {
 
-}
+// }
 
 //===========================================
 // min_key
 //===========================================
-template <typename D, typename K>
-K BST<D, K>::min_key(void) {
+// template <typename D, typename K>
+// K BST<D, K>::min_key(void) {
 
-}
+// }
 
 //===========================================
 // successor
 //===========================================
-template <typename D, typename K>
-K BST<D, K>::successor(const K& key) {
+// template <typename D, typename K>
+// K BST<D, K>::successor(const K& key) {
 
-}
+// }
 
 //===========================================
 // trim
 //===========================================
-template <typename D, typename K> 
-void BST<D, K>::trim(K low, K high) {
+// template <typename D, typename K> 
+// void BST<D, K>::trim(K low, K high) {
 
-}
+// }
+
+//===========================================
+// inorder_tree_walk
+//===========================================
+// template <typename D, typename K>
+// void BST<D, K>::inorder_tree_walk(std::stringstream result, Node* x) {
+//     if (x != nullptr) {
+//         inorder_tree_walk(result, x->left);
+//         s << " " << x->key;
+//         inorder_tree_walk(result, x->right);
+//     }
+
+// }

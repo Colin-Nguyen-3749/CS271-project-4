@@ -9,9 +9,7 @@
 #include <iostream>
 #include <sstream>
 #include <stdlib.h>
-#include <string>
-#include "Element.h"
-#include 
+#include <string> 
 
 #ifndef BST_H
 #define BST_H
@@ -20,17 +18,6 @@ using namespace std;
 
 template <typename D, typename K>
 class BST {
-
-    Node* root;
-
-    struct Node {
-        D data;
-        K key;
-
-        Element* parent;
-        Element* left;
-        Element* right;
-    };
 
     public:
 
@@ -48,24 +35,36 @@ class BST {
     // K min_key (void);
     // K successor (const K& key);
     // void trim(K low, K high);
-
-    // std::string to_string (void) const {
-    //     std::stringstream s;
-
-    //     for (int i = 0; i < size - 1; i++) {
-    //         s << list[i] << " ";
-    //     }
-    //     if (size != 0) {
-    //         s << list[size - 1];
-    //     }
-    //     return s.str();
-    // }
+    void inorder_tree_walk(std::stringstream result, Node* x); // we might not need this
 
 
+    std::string to_string (void) const {
+        std::stringstream s;
 
-    // private:
+        inorder_tree_walk(s, root);
+
+        return s.str();
+    };
+
+    // use a queue to keep track of the parents and children that you saw
+    // when we saw all children of the first item in the queue, remove it and then check the children of the other children in the queue
+    
 
 
+
+    private:
+
+    struct Node {
+        D data;
+        K key;
+
+        Node* parent;
+        Node* left;
+        Node* right;
+    };
+
+    int size;
+    Node* root;
 
 };
 
