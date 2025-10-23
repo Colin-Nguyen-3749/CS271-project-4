@@ -203,34 +203,34 @@ D BST<D, K>::get(const K& key) {
 template <typename D, typename K> 
 std::string BST<D, K>::to_string(void) const {
 
-    if (root == nullptr) { return ""; }
+    if (root == nullptr) { return ""; } // empty tree case
 
     std::stringstream s;
 
     std::queue<Node*> myQueue;
-    myQueue.push(root);
+    myQueue.push(root); // start with the root node
 
     int checkKeys = 1;
-    int toRemove = 0;
+    int toRemove = 0; // initialize our tracking variables
 
-    while(checkKeys != 0) {
+    while(checkKeys != 0) { // while there are still nodes to process
          
-        toRemove = checkKeys;
-        checkKeys = 0;
+        toRemove = checkKeys; // number of nodes to remove at this level
+        checkKeys = 0; // reset checkKeys for the next level
         
-        while (toRemove !=0) {
-            Node* x = myQueue.front();
-            s << x->key << " ";
+        while (toRemove !=0) { // process all nodes at this level
+            Node* x = myQueue.front(); // get the front node
+            s << x->key << " "; // add its key to the stringstream
             if (x->left != nullptr) {
                 checkKeys++;
                 myQueue.push(x->left);
-            }
+            } // if left child exists, add to queue
             if (x->right != nullptr) {
                 checkKeys++;
                 myQueue.push(x->right);
-            }
-            myQueue.pop();
-            toRemove--;
+            } // if right child exists, add to queue
+            myQueue.pop(); // remove the processed node from the queue
+            toRemove--; // decrement the count of nodes to remove at this level
         } 
     }
 
