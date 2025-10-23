@@ -31,9 +31,12 @@ BST<D, K>::BST() {
 template <typename D, typename K>
 BST<D, K>::BST(const D& data, const K& key) {
 
-    Node instance = new Node;
+    Node* instance = new Node;
     instance->data = data;
     instance->key = key;
+    instance->left = nullptr;
+    instance->right = nullptr;
+    instance->parent = nullptr;
     root = instance;
 
 }
@@ -64,7 +67,10 @@ void BST<D, K>::insert(const D& data, const K& key) {
     
     Node* z = new Node;
     z->data = data;
-    z->key = key; // create node to be inserted
+    z->key = key;
+    z->left = nullptr;
+    z->right = nullptr;
+    z->parent = nullptr; // initialize new node z to be inserted
 
     Node* y = nullptr;
     Node* x = root; // initialize tracking nodes
@@ -95,8 +101,8 @@ D BST<D, K>::get(const K& key) {
         else { x = x->right; } // right subtree traversal
     }
 
-    if (x->key != key) { // if the key wasn't found in the BST, throw an error
-        throw std::runtime_error("key doesn't exsist within BST.");
+    if (x == nullptr || x->key != key) { // if the key wasn't found in the BST, throw an error
+        throw std::runtime_error("key doesn't exist within BST.");
     }
 
     // return data associated with key
@@ -196,10 +202,15 @@ D BST<D, K>::get(const K& key) {
 //===========================================
 template <typename D, typename K> 
 std::string BST<D, K>::to_string(void) const {
+
+    if (root == nullptr) { return ""; }
+
     std::stringstream s;
 
-    int checkKeys = 1;
     std::queue<Node*> myQueue;
+    myQueue.push(root);
+
+    int checkKeys = 1;
     int toRemove = 0;
 
     while(checkKeys != 0) {
@@ -223,5 +234,8 @@ std::string BST<D, K>::to_string(void) const {
         } 
     }
 
-    return s.str();
+    string result = s.str();
+    result.pop_back();  // Remove the trailing space
+
+    return result;
 }
