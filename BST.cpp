@@ -224,7 +224,7 @@ K BST<D, K>::successor(const K& key) {
             ptr = qtr;
             qtr = qtr->parent; // move both qtr and ptr up a node 
         } 
-        
+
         // if we reached the root node and there IS left-child relationship between qtr and ptr
         if (qtr->parent == nullptr && ptr != qtr->right) {
             return qtr->key;
@@ -301,19 +301,19 @@ std::string BST<D, K>::to_string(void) const {
 //===========================================
 // transplant
 //===========================================
-// template <typename D, typename K>
-// void BST<D, K>::transplant(Node* u, Node* v) {
-//     if (u->parent == nullptr) {
-//         root = v; // so v is the root node of the subtree we're inserting; does that mean that v 
-//                     // is already linked to the rest of their children or is that just conceptual
-//                     // and we'd have to manually add them in?
-//     } else if (u == u->parent->left) {
-//         u->parent->left = v;
-//     } else {
-//         u->parent->right = v;
-//     } 
+template <typename D, typename K>
+void BST<D, K>::transplant(Node u, Node v) {
+    if (u->parent == nullptr) {
+        root = v; // so v is the root node of the subtree we're inserting; does that mean that v 
+                    // is already linked to the rest of their children or is that just conceptual
+                    // and we'd have to manually add them in?
+    } else if (u == u->parent->left) {
+        u->parent->left = v;
+    } else {
+        u->parent->right = v;
+    } 
 
-//     if (v != nullptr) {
-//         v->parent = u->parent;
-//     }
-// }
+    if (v != nullptr) {
+        v->parent = u->parent;
+    }
+}
