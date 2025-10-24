@@ -76,12 +76,13 @@ void test_get()
     {
         BST<string, int> bst;
         string val = bst.get(0);
-        if (val != "")
+        if (val != "f")
         {
             cout << "Incorrect get result from empty bst. Expected 0 but got " << val << endl;
         }
         bst.insert("one", 1);
         val = bst.get(1);
+        cout << bst.to_string() << endl;
         if (val != "one")
         {
             cout << "Incorrect get result. Expected \"one\" but got : " << val << endl;
@@ -138,27 +139,27 @@ void test_get()
 //     }
 // }
 
-// void test_max_key()
-// {
-//     try
-//     {
-//         int vals[10] = {5, 2, 7, 1, 3, 4, 6, 9, 8, 10};
-//         BST<string, int> balanced_bst;
-//         for (int i = 0; i < 10; i++)
-//         {
-//             balanced_bst.insert(to_string(vals[i]) + " data", vals[i]);
-//         }
-//         int max_k = balanced_bst.max_key();
-//         if (max_k != 10)
-//         {
-//             cout << "Incorrect result of max_key. Expected 10 but got : " << max_k << endl;
-//         }
-//     }
-//     catch (exception &e)
-//     {
-//         cerr << "Error in determining key of max node in bst : " << e.what() << endl;
-//     }
-// }
+void test_max_key()
+{
+    try
+    {
+        int vals[10] = {5, 2, 7, 1, 3, 4, 6, 9, 8, 10};
+        BST<string, int> balanced_bst;
+        for (int i = 0; i < 10; i++)
+        {
+            balanced_bst.insert(to_string(vals[i]) + " data", vals[i]);
+        }
+        int max_k = balanced_bst.max_key();
+        if (max_k != 10)
+        {
+            cout << "Incorrect result of max_key. Expected 10 but got : " << max_k << endl;
+        }
+    }
+    catch (exception &e)
+    {
+        cerr << "Error in determining key of max node in bst : " << e.what() << endl;
+    }
+}
 
 // void test_min_data()
 // {
@@ -357,7 +358,7 @@ int main()
     test_get();
     // test_remove();
     // test_max_data();
-    // test_max_key();
+    test_max_key();
     // test_min_data();
     // test_min_key();
     // test_successor();
