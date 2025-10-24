@@ -263,3 +263,23 @@ std::string BST<D, K>::to_string(void) const {
 
     return result;
 }
+
+//===========================================
+// transplant
+//===========================================
+template <typename D, typename K>
+void BST<D, K>::transplant(Node* u, Node* v) {
+    if (u->parent == nullptr) {
+        root = v; // so v is the root node of the subtree we're inserting; does that mean that v 
+                    // is already linked to the rest of their children or is that just conceptual
+                    // and we'd have to manually add them in?
+    } else if (u == u->parent->left) {
+        u->parent->left = v;
+    } else {
+        u->parent->right = v;
+    } 
+
+    if (v != nullptr) {
+        v->parent = u->parent;
+    }
+}
