@@ -34,10 +34,10 @@ class BST {
     K max_key (void);
     D min_data (void);
     K min_key (void);
-    // K successor (const K& key);
+    K successor (const K& key);
     // void trim(K low, K high);
     // void inorder_tree_walk(std::stringstream result, Node* x); // we might not need this
-    void transplant(Node* u, Node* v);
+    // void transplant(Node* u, Node* v);
 
 
     std::string to_string (void) const;

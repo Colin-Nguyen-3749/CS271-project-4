@@ -195,10 +195,25 @@ K BST<D, K>::min_key(void) {
 //===========================================
 // successor
 //===========================================
-// template <typename D, typename K>
-// K BST<D, K>::successor(const K& key) {
+template <typename D, typename K>
+K BST<D, K>::successor(const K& key) {
 
-// }
+    Node* ptr = root; 
+    // find the location of the key we're trying to get the successor of 
+    while (ptr->key != key && ptr != nullptr) {
+        if (key < ptr->key) {
+            ptr = ptr->left; // if key is less than what we're looking at, go left
+        } else if (key > ptr->key) {
+            ptr = ptr->right; // if key is greater than what we're looking at, go right
+        }
+    }
+    if (ptr->right != nullptr) {
+        if (ptr != nullptr) { // if we're not working with an empty tree
+        while (ptr->left != nullptr) { ptr = ptr->left; } // go to the leftmost leaf node
+        }
+    }   
+    return ptr->key;
+}
 
 //===========================================
 // trim
@@ -267,19 +282,19 @@ std::string BST<D, K>::to_string(void) const {
 //===========================================
 // transplant
 //===========================================
-template <typename D, typename K>
-void BST<D, K>::transplant(Node* u, Node* v) {
-    if (u->parent == nullptr) {
-        root = v; // so v is the root node of the subtree we're inserting; does that mean that v 
-                    // is already linked to the rest of their children or is that just conceptual
-                    // and we'd have to manually add them in?
-    } else if (u == u->parent->left) {
-        u->parent->left = v;
-    } else {
-        u->parent->right = v;
-    } 
+// template <typename D, typename K>
+// void BST<D, K>::transplant(Node* u, Node* v) {
+//     if (u->parent == nullptr) {
+//         root = v; // so v is the root node of the subtree we're inserting; does that mean that v 
+//                     // is already linked to the rest of their children or is that just conceptual
+//                     // and we'd have to manually add them in?
+//     } else if (u == u->parent->left) {
+//         u->parent->left = v;
+//     } else {
+//         u->parent->right = v;
+//     } 
 
-    if (v != nullptr) {
-        v->parent = u->parent;
-    }
-}
+//     if (v != nullptr) {
+//         v->parent = u->parent;
+//     }
+// }

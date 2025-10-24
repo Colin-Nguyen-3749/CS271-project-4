@@ -205,37 +205,37 @@ void test_min_key()
     }
 }
 
-// void test_successor()
-// {
-//     try
-//     {
-//         int vals[10] = {5, 2, 7, 1, 3, 4, 6, 9, 8, 10};
-//         BST<string, int> balanced_bst;
-//         for (int i = 0; i < 10; i++)
-//         {
-//             balanced_bst.insert(to_string(vals[i]) + " data", vals[i]);
-//         }
-//         int succ = balanced_bst.successor(4);
-//         if (succ != 5)
-//         {
-//             cout << "Incorrect result of successor of 4. Expected 5 but got : " << succ << endl;
-//         }
-//         succ = balanced_bst.successor(7);
-//         if (succ != 8)
-//         {
-//             cout << "Incorrect result of successor of 7. Expected 8 but got : " << succ << endl;
-//         }
-//         succ = balanced_bst.successor(10);
-//         if (succ != 0)
-//         {
-//             cout << "Incorrect result of successor of 10. Expected 0 but got : " << succ << endl;
-//         }
-//     }
-//     catch (exception &e)
-//     {
-//         cerr << "Error in determining successor in bst : " << e.what() << endl;
-//     }
-// }
+void test_successor()
+{
+    try
+    {
+        int vals[10] = {5, 2, 7, 1, 3, 4, 6, 9, 8, 10};
+        BST<string, int> balanced_bst;
+        for (int i = 0; i < 10; i++)
+        {
+            balanced_bst.insert(to_string(vals[i]) + " data", vals[i]);
+        }
+        int succ = balanced_bst.successor(4);
+        if (succ != 5)
+        {
+            cout << "Incorrect result of successor of 4. Expected 5 but got : " << succ << endl;
+        }
+        succ = balanced_bst.successor(7);
+        if (succ != 8)
+        {
+            cout << "Incorrect result of successor of 7. Expected 8 but got : " << succ << endl;
+        }
+        succ = balanced_bst.successor(10);
+        if (succ != 0)
+        {
+            cout << "Incorrect result of successor of 10. Expected 0 but got : " << succ << endl;
+        }
+    }
+    catch (exception &e)
+    {
+        cerr << "Error in determining successor in bst : " << e.what() << endl;
+    }
+}
 
 // void test_in_order()
 // {
@@ -361,7 +361,7 @@ int main()
     test_max_key();
     test_min_data();
     test_min_key();
-    // test_successor();
+    test_successor();
     // test_in_order();
     // test_trim();
     // test_binhex();
