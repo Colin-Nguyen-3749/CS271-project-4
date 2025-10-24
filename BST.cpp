@@ -209,19 +209,24 @@ K BST<D, K>::successor(const K& key) {
     }
 
     if (ptr->right != nullptr) {
+        ptr = ptr->right; // go to the right subtree of the node we're looking at 
         while (ptr->left != nullptr) { 
             ptr = ptr->left; 
-            } // go to the leftmost leaf node
+        } // go to the leftmost leaf node
         return ptr->key;
-    }   
-
-    Node* qtr = ptr->parent; // create qtr, the equivalent of y, and set it to ptr's parent
-    while (qtr != nullptr && ptr == qtr->right) {
-        qtr = qtr->parent;
-        qtr->right = ptr;
+    } else {   
+        Node* qtr = ptr->parent; // create qtr, the equivalent of y, and set it to ptr's parent
+        while (qtr->parent != nullptr && ptr == qtr->right) {
+            ptr = qtr;
+            qtr = qtr->parent; // move both qtr and ptr up a node 
+        } 
+        // if we reached the root node and there IS left-child relationship between qtr and ptr
+        if (qtr->parent == nullptr && ptr != qtr->right) {
+            return qtr->key;
+        } else { // case when there ISN'T a left-child relationship between qtr and ptr
+        return 0;  
+        }  
     }
-
-    return qtr->key;    
 }
 
 //===========================================
