@@ -31,9 +31,9 @@ class BST {
     D get (const K& key);
     // void remove (const K& key);
     // D max_data (void);
-    // K max_key (void);
+    K max_key (void);
     // D min_data (void);
-    // K min_key (void);
+    K min_key (void);
     // K successor (const K& key);
     // void trim(K low, K high);
     // void inorder_tree_walk(std::stringstream result, Node* x); // we might not need this
