@@ -183,27 +183,27 @@ void test_max_key()
 //     }
 // }
 
-// void test_min_key()
-// {
-//     try
-//     {
-//         int vals[10] = {5, 2, 7, 1, 3, 4, 6, 9, 8, 10};
-//         BST<string, int> balanced_bst;
-//         for (int i = 0; i < 10; i++)
-//         {
-//             balanced_bst.insert(to_string(vals[i]) + " data", vals[i]);
-//         }
-//         int min_k = balanced_bst.min_key();
-//         if (min_k != 1)
-//         {
-//             cout << "Incorrect result of min_key. Expected 10 but got : " << min_k << endl;
-//         }
-//     }
-//     catch (exception &e)
-//     {
-//         cerr << "Error in determining key of min node in bst : " << e.what() << endl;
-//     }
-// }
+void test_min_key()
+{
+    try
+    {
+        int vals[10] = {5, 2, 7, 1, 3, 4, 6, 9, 8, 10};
+        BST<string, int> balanced_bst;
+        for (int i = 0; i < 10; i++)
+        {
+            balanced_bst.insert(to_string(vals[i]) + " data", vals[i]);
+        }
+        int min_k = balanced_bst.min_key();
+        if (min_k != 1)
+        {
+            cout << "Incorrect result of min_key. Expected 10 but got : " << min_k << endl;
+        }
+    }
+    catch (exception &e)
+    {
+        cerr << "Error in determining key of min node in bst : " << e.what() << endl;
+    }
+}
 
 // void test_successor()
 // {
@@ -360,7 +360,7 @@ int main()
     // test_max_data();
     test_max_key();
     // test_min_data();
-    // test_min_key();
+    test_min_key();
     // test_successor();
     // test_in_order();
     // test_trim();
