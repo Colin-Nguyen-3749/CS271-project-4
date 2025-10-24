@@ -142,10 +142,10 @@ D BST<D, K>::get(const K& key) {
 template <typename D, typename K>
 D BST<D, K>::max_data(void) {
     Node* x = root;
-    if (x != nullptr) {
+    if (x != nullptr) { // if we're not working with an empty tree
         while (x->right != nullptr) {
             x = x->right; 
-        }
+        } // go to the right most leaf node
     }
     return x->data;
 }
@@ -156,10 +156,10 @@ D BST<D, K>::max_data(void) {
 template <typename D, typename K> 
 K BST<D, K>::max_key(void) {
     Node* x = root;
-    if (x != nullptr) {
+    if (x != nullptr) { // if we're not working with an empty tree
         while (x->right != nullptr) {
             x = x->right; 
-        }
+        } // go to the right most leaf node
     }
     return x->key;
 }
@@ -170,10 +170,10 @@ K BST<D, K>::max_key(void) {
 template <typename D, typename K>
 D BST<D, K>::min_data(void) {
     Node* x = root;
-    if (x != nullptr) {
+    if (x != nullptr) { // if we're not working with an empty tree
         while (x->left != nullptr) {
             x = x->left; 
-        }
+        } // go to the leftmost leafnode
     }
     return x->data;
 }
@@ -184,10 +184,10 @@ D BST<D, K>::min_data(void) {
 template <typename D, typename K>
 K BST<D, K>::min_key(void) {
     Node* x = root;
-    if (x != nullptr) {
+    if (x != nullptr) { // if we're not working with an empty tree
         while (x->left != nullptr) {
             x = x->left; 
-        }
+        } // go to the leftmost leaf node
     }
     return x->key;
 }
