@@ -139,10 +139,16 @@ D BST<D, K>::get(const K& key) {
 //===========================================
 // max_data
 //===========================================
-// template <typename D, typename K>
-// D BST<D, K>::max_data(void) {
-
-// }
+template <typename D, typename K>
+D BST<D, K>::max_data(void) {
+    Node* x = root;
+    if (x != nullptr) {
+        while (x->right != nullptr) {
+            x = x->right; 
+        }
+    }
+    return x->data;
+}
 
 //===========================================
 // max_key
@@ -161,10 +167,16 @@ K BST<D, K>::max_key(void) {
 //===========================================
 // min_data
 //===========================================
-// template <typename D, typename K>
-// D BST<D, K>::min_data(void) {
-
-// }
+template <typename D, typename K>
+D BST<D, K>::min_data(void) {
+    Node* x = root;
+    if (x != nullptr) {
+        while (x->left != nullptr) {
+            x = x->left; 
+        }
+    }
+    return x->data;
+}
 
 //===========================================
 // min_key
