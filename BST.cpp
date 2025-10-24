@@ -207,12 +207,21 @@ K BST<D, K>::successor(const K& key) {
             ptr = ptr->right; // if key is greater than what we're looking at, go right
         }
     }
+
     if (ptr->right != nullptr) {
-        if (ptr != nullptr) { // if we're not working with an empty tree
-        while (ptr->left != nullptr) { ptr = ptr->left; } // go to the leftmost leaf node
-        }
+        while (ptr->left != nullptr) { 
+            ptr = ptr->left; 
+            } // go to the leftmost leaf node
+        return ptr->key;
     }   
-    return ptr->key;
+
+    Node* qtr = ptr->parent; // create qtr, the equivalent of y, and set it to ptr's parent
+    while (qtr != nullptr && ptr == qtr->right) {
+        qtr = qtr->parent;
+        qtr->right = ptr;
+    }
+
+    return qtr->key;    
 }
 
 //===========================================
