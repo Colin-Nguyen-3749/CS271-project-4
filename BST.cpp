@@ -46,7 +46,9 @@ BST<D, K>::BST(const D& data, const K& key) {
 //===========================================
 template <typename D, typename K>
 BST<D, K>::~BST() {
+
     inorder_walk_destructor(root);
+
 }
 
 //===========================================
@@ -113,28 +115,60 @@ D BST<D, K>::get(const K& key) {
 //===========================================
 // remove
 //===========================================
-// template <typename D, typename K>
-// void BST<D, K>::remove(const K& key) {
+template <typename D, typename K>
+void BST<D, K>::remove(const K& key) {
 
-    
-    // Node* x = root;
+    if (root == nullptr) {
+        throw std::runtime_error("BST is empty.");
+    } // Handle empty tree case
 
-    // while (x != nullptr && x->key != key) {
-    //     if (key < x->key) { x = x->left; }
-    //     else { x = x->right; }
-    // }
+    // Find node z with this key
+    Node* z = root;
+    while (z != nullptr && z->key != key) {
+        if (key < z->key) z = z->left;
+        else z = z->right;
+    }
+    if (z == nullptr) {
+        throw std::runtime_error("key doesn't exist within BST.");
+    } // Handle key not found case
 
-    // if (x->key != key) {
-    //     throw std::runtime_error("Key doesn't exist within BST.")
-    // }
+    // Removal Cases
+    if (z->left == nullptr) {
+        // Case 1: no left child
+        transplant(z, z->right);
+    }
+    else if (z->right == nullptr) {
+        // Case 2: no right child
+        transplant(z, z->left);
+    }
+    else {
+        // Case 3: two children
+        // Find inorder successor y = minimum(z->right)
+        Node* y = z->right;
+        while (y->left != nullptr) {
+            y = y->left;
+        }
 
-    // if (x->parent->left->key == key) { x->parent->left = x->; }
-    // else { x->parent->right = x->; }
+        if (y->parent != z) {
+            // Move y's right child up into y's place
+            transplant(y, y->right);
 
-    // ~x;
-    
+            // Put z->right under y
+            y->right = z->right;
+            y->right->parent = y;
+        }
 
-// }
+        // Replace z with y
+        transplant(z, y);
+
+        // Put z->left under y
+        y->left = z->left;
+        y->left->parent = y;
+    }
+
+    // Free the removed node
+    delete z;
+}
 
 //===========================================
 // max_data
@@ -198,40 +232,44 @@ K BST<D, K>::min_key(void) {
 template <typename D, typename K>
 K BST<D, K>::successor(const K& key) {
 
-    Node* ptr = root; 
+    Node* x = root; 
 
-    // find the location of the key we're trying to get the successor of 
-    while (ptr->key != key && ptr != nullptr) {
-        if (key < ptr->key) {
-            ptr = ptr->left; // if key is less than what we're looking at, go left
-        } else if (key > ptr->key) {
-            ptr = ptr->right; // if key is greater than what we're looking at, go right
+    // Find node containing key
+    while (x != nullptr && x->key != key) {
+        if (key < x->key) {
+            x = x->left;
+        } else {
+            x = x->right;
         }
     }
 
-    if (ptr->right != nullptr) {
+    if (x == nullptr) {
+        throw std::runtime_error("Key not found in BST");
+    } // handle key not found case
 
-        ptr = ptr->right; // go to the right subtree of the node we're looking at 
-        while (ptr->left != nullptr) { 
-            ptr = ptr->left; 
-        } // go to the leftmost leaf node
-        return ptr->key;
-
-    } else {   
-        
-        Node* qtr = ptr->parent; // create qtr, the equivalent of y, and set it to ptr's parent
-        while (qtr->parent != nullptr && ptr == qtr->right) {
-            ptr = qtr;
-            qtr = qtr->parent; // move both qtr and ptr up a node 
-        } 
-
-        // if we reached the root node and there IS left-child relationship between qtr and ptr
-        if (qtr->parent == nullptr && ptr != qtr->right) {
-            return qtr->key;
-        } else { // case when there ISN'T a left-child relationship between qtr and ptr
-        return 0;  
-        }  
+    // Case 1: Right subtree exists -> successor is its min
+    if (x->right != nullptr) {
+        Node* temp = x->right;
+        while (temp->left != nullptr) {
+            temp = temp->left;
+        }
+        return temp->key; // return the key of the successor node
     }
+
+    // Case 2: No right subtree -> go up to first left-ancestor
+    Node* successor = x->parent;
+    while (successor != nullptr && x == successor->right) {
+        x = successor;
+        successor = successor->parent;
+    }
+
+    if (successor == nullptr) {
+        // no successor (ptr was the max element)
+        throw std::runtime_error("No successor exists for this key");
+    } // handle no left ancestor case
+
+    return successor->key;
+
 }
 
 //===========================================
@@ -239,16 +277,27 @@ K BST<D, K>::successor(const K& key) {
 //===========================================
 template <typename D, typename K>
 std::string BST<D, K>::in_order(void) {
+
     return inorder_tree_walk(root);
+
 }
 
 //===========================================
 // trim
 //===========================================
-// template <typename D, typename K> 
-// void BST<D, K>::trim(K low, K high) {
+template <typename D, typename K> 
+void BST<D, K>::trim(K low, K high) {
 
-// }
+    vector<Node*> nodes;
+    nodes = arrayify(root, nodes); // get all nodes in vector (in-order traversal)
+
+    for (Node* node : nodes) { // for each node pointer in the vector
+        if (node->key < low || node->key > high) { 
+            remove(node->key); // remove nodes with keys outside [low, high]
+        }
+    }
+
+}
 
 //===========================================
 // inorder_traversal_destructor
@@ -312,19 +361,18 @@ std::string BST<D, K>::to_string(void) const {
 //===========================================
 template <typename D, typename K>
 void BST<D, K>::transplant(Node* u, Node* v) {
-    if (u->parent == nullptr) {
-        root = v; // so v is the root node of the subtree we're inserting; does that mean that v 
-                    // is already linked to the rest of their children or is that just conceptual
-                    // and we'd have to manually add them in?
-    } else if (u == u->parent->left) {
-        inorder_walk_destructor(u->parent->left);
+    // Replace subtree rooted at u with subtree rooted at v
+    if (u->parent == nullptr) { // u is the root
+        root = v;
+    }
+    else if (u == u->parent->left) { // u is a left child
         u->parent->left = v;
-    } else {
-        inorder_walk_destructor(u->parent->right);
+    }
+    else { // u is a right child
         u->parent->right = v;
-    } 
+    }
 
-    if (v != nullptr) {
+    if (v != nullptr) { // update v's parent if v is not null (prevent dereferencing null pointer)
         v->parent = u->parent;
     }
 }
@@ -335,13 +383,27 @@ void BST<D, K>::transplant(Node* u, Node* v) {
 template <typename D, typename K>
 std::string BST<D, K>::inorder_tree_walk(Node* x) {
 
-    std::stringstream s;
-    if (x != nullptr) {
-        inorder_tree_walk(x->left);
-        s << x->key << " ";
-        inorder_tree_walk(x->right);
-    }
+    if (x == nullptr) return ""; // base case
 
-    string result = s.str();
-    return result;
+    std::string left  = inorder_tree_walk(x->left); // traverse left subtree
+    std::string mid   = std::to_string(x->key) + " "; // add current node's key
+    std::string right = inorder_tree_walk(x->right); // traverse right subtree
+
+    return left + mid + right; // concatenate results
+
+}
+
+//===========================================
+// arrayify
+//===========================================
+template <typename D, typename K>
+vector<typename BST<D, K>::Node*> BST<D, K>::arrayify(Node* x, vector<Node*>& nodes) {
+
+    if (x != nullptr) {
+        arrayify(x->left, nodes);
+        nodes.push_back(x); // add the current node to the vector, passing vector by reference
+        arrayify(x->right, nodes);
+    } // in-order traversal to populate the vector
+
+    return nodes; // return the populated vector
 }

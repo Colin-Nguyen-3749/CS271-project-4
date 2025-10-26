@@ -43,18 +43,18 @@ class BST {
     bool empty (void);
     void insert (const D& data, const K& key);
     D get (const K& key);
-    // void remove (const K& key);
+    void remove (const K& key);
     D max_data (void);
     K max_key (void);
     D min_data (void);
     K min_key (void);
     K successor (const K& key);
     std::string in_order(void);
-    // void trim(K low, K high);
+    void trim(K low, K high);
     void inorder_walk_destructor(Node* x); 
     std::string inorder_tree_walk(Node* x);
+    vector<Node*> arrayify(Node* x, vector<Node*>& nodes);
     void transplant(Node* u, Node* v);
-
 
     std::string to_string (void) const;
 
