@@ -51,7 +51,8 @@ class BST {
     K successor (const K& key);
     std::string in_order(void);
     // void trim(K low, K high);
-    void inorder_walk_destructor(Node* x); // we might not need this
+    void inorder_walk_destructor(Node* x); 
+    std::string inorder_tree_walk(Node* x);
     void transplant(Node* u, Node* v);
 
 

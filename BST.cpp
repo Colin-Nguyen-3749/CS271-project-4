@@ -235,6 +235,14 @@ K BST<D, K>::successor(const K& key) {
 }
 
 //===========================================
+// in_order
+//===========================================
+template <typename D, typename K>
+std::string BST<D, K>::in_order(void) {
+    return inorder_tree_walk(root);
+}
+
+//===========================================
 // trim
 //===========================================
 // template <typename D, typename K> 
@@ -319,4 +327,21 @@ void BST<D, K>::transplant(Node* u, Node* v) {
     if (v != nullptr) {
         v->parent = u->parent;
     }
+}
+
+//===========================================
+// inorder_tree_walk
+//===========================================
+template <typename D, typename K>
+std::string BST<D, K>::inorder_tree_walk(Node* x) {
+
+    std::stringstream s;
+    if (x != nullptr) {
+        inorder_tree_walk(x->left);
+        s << x->key << " ";
+        inorder_tree_walk(x->right);
+    }
+
+    string result = s.str();
+    return result;
 }
