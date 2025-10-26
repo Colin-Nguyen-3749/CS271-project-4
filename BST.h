@@ -49,8 +49,9 @@ class BST {
     D min_data (void);
     K min_key (void);
     K successor (const K& key);
+    std::string in_order(void);
     // void trim(K low, K high);
-    void inorder_traversal_destructor(Node* x); // we might not need this
+    void inorder_walk_destructor(Node* x); // we might not need this
     void transplant(Node* u, Node* v);
 
 

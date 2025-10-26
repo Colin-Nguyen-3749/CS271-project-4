@@ -46,7 +46,7 @@ BST<D, K>::BST(const D& data, const K& key) {
 //===========================================
 template <typename D, typename K>
 BST<D, K>::~BST() {
-    inorder_traversal_destructor(root);
+    inorder_walk_destructor(root);
 }
 
 //===========================================
@@ -246,12 +246,12 @@ K BST<D, K>::successor(const K& key) {
 // inorder_traversal_destructor
 //===========================================
 template <typename D, typename K>
-void BST<D, K>::inorder_traversal_destructor(Node* x) {
+void BST<D, K>::inorder_walk_destructor(Node* x) {
 
     if (x != nullptr) {
-        inorder_traversal_destructor(x->left);
+        inorder_walk_destructor(x->left);
         delete x;
-        inorder_traversal_destructor(x->right);
+        inorder_walk_destructor(x->right);
     }
 
 }
@@ -309,8 +309,10 @@ void BST<D, K>::transplant(Node* u, Node* v) {
                     // is already linked to the rest of their children or is that just conceptual
                     // and we'd have to manually add them in?
     } else if (u == u->parent->left) {
+        inorder_walk_destructor(u->parent->left);
         u->parent->left = v;
     } else {
+        inorder_walk_destructor(u->parent->right);
         u->parent->right = v;
     } 
 
