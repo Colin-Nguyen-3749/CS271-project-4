@@ -44,10 +44,10 @@ BST<D, K>::BST(const D& data, const K& key) {
 //===========================================
 // Destructor
 //===========================================
-// template <typename D, typename K>
-// BST<D, K>::~BST() {
-    
-// }
+template <typename D, typename K>
+BST<D, K>::~BST() {
+    inorder_traversal_destructor(root);
+}
 
 //===========================================
 // empty
@@ -243,17 +243,18 @@ K BST<D, K>::successor(const K& key) {
 // }
 
 //===========================================
-// inorder_tree_walk
+// inorder_traversal_destructor
 //===========================================
-// template <typename D, typename K>
-// void BST<D, K>::inorder_tree_walk(std::stringstream result, Node* x) {
-//     if (x != nullptr) {
-//         inorder_tree_walk(result, x->left);
-//         s << " " << x->key;
-//         inorder_tree_walk(result, x->right);
-//     }
+template <typename D, typename K>
+void BST<D, K>::inorder_traversal_destructor(Node* x) {
 
-// }
+    if (x != nullptr) {
+        inorder_traversal_destructor(x->left);
+        delete x;
+        inorder_traversal_destructor(x->right);
+    }
+
+}
 
 //===========================================
 // to_string
@@ -302,7 +303,7 @@ std::string BST<D, K>::to_string(void) const {
 // transplant
 //===========================================
 template <typename D, typename K>
-void BST<D, K>::transplant(Node u, Node v) {
+void BST<D, K>::transplant(Node* u, Node* v) {
     if (u->parent == nullptr) {
         root = v; // so v is the root node of the subtree we're inserting; does that mean that v 
                     // is already linked to the rest of their children or is that just conceptual
