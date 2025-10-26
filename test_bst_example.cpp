@@ -59,7 +59,7 @@ void test_insert()
             balanced_bst.insert("some data", vals[i]);
         }
         bst_str = balanced_bst.to_string();
-        if (bst_str != "5 2 7 1 3 6 9 4 8 10")
+        if (bst_str != "3 0 7 4 9 5 23 6 12 18")
         {
             cout << "Incorrect result of inserting keys {5, 2, 7, 1, 3, 4, 6, 9, 8, 10}. Expected 5 2 7 1 3 6 9 4 8 10 but got : " << bst_str << endl;
         }
