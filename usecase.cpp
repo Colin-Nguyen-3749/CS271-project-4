@@ -18,7 +18,7 @@ using namespace std;
 template <typename D, typename K>
 BST<D, K>* create_bst (string fname) {
 
-    BST<D, K> BST;
+    BST<D, K> bst;
 
     ifstream file(fname);
     if (!file.is_open()) {
@@ -35,13 +35,15 @@ BST<D, K>* create_bst (string fname) {
         getline(ss, binary, '\n');
 
         // Insert the values into the BST
-        BST.insert(hexStr[0], binary);
+        bst.insert(hexStr, binary);
 
     }
 
     file.close();
 
-    return BST;
+    BST<D, K>* treePtr = &bst;
+
+    return treePtr;
 
 }
 
@@ -55,8 +57,8 @@ string convert(BST<D,K>* bst, string bin) {
     string hexConversion;
 
     for (int i = 0; i < bin.length(); i += 4) {
-        string 4bit = bin.substr(i, i+3);
-        hexConversion += bst.get(4bit);
+        string fourbit = bin.substr(i, i+3);
+        hexConversion += bst->get(fourbit);
     } // gather every 4-bit denomination using it as the key, add its data to the conversion
 
     return hexConversion; // return the conversion
@@ -65,16 +67,16 @@ string convert(BST<D,K>* bst, string bin) {
 
 int main () {
 
-    BST<char, string> conversionTable; // BST to hold binary to hex conversion
+    BST<string, string>* conversionTable = create_bst<string, string> ("binhex.txt");
 
-    conversionTable = create_bst<char, string> ("binhex.txt");
+    cout << conversionTable->to_string();
 
     cout << "Enter binary representation for conversion: ";
 
     string binary;
     cin >> binary;
 
-    cout << "Hexadecimal representation of " << binary << " is " << convert<char, string> (conversionTable, binary) << endl;
+    cout << "Hexadecimal representation of " << binary << " is " << convert<string, string> (conversionTable, binary) << endl;
 
     return 0;
 }
