@@ -133,7 +133,14 @@ void test_get()
     string val0 = bst.get(1);
     string val1 = bst.get(192);
     string val2 = bst.get(1238);
-    string val4 = bst.get(124);
+    string val3 = bst.get(10);
+    string val4 = bst.get(97);
+    string val5 = bst.get(127);
+    string val6 = bst.get(0);
+    string val7 = bst.get(16);
+    string val8 = bst.get(158);
+    string val9 = bst.get(12);
+    string val10 = bst.get(124);
 
     if (val0 != "Bravo")
         {
@@ -149,15 +156,173 @@ void test_get()
     {
         cout << "Incorrect get result. Expected \"Tango\" but got : " << val2 << endl;
     }
+
+    if (val3 != "Quebec")
+    {
+        cout << "Incorrect get result. Expected \"Quebec\" but got : " << val3 << endl;
+    }
+
+    if (val4 != "Victor")
+    {
+        cout << "Incorrect get result. Expected \"Victor\" but got : " << val4 << endl;
+    }
+
+    if (val5 != "Uniform")
+    {
+        cout << "Incorrect get result. Expected \"Uniform\" but got : " << val5 << endl;
+    }
+
+    if (val6 != "Whiskey")
+    {
+        cout << "Incorrect get result. Expected \"Whiskey\" but got : " << val6 << endl;
+    }
+
+    if (val7 != "Oscar")
+    {
+        cout << "Incorrect get result. Expected \"Oscar\" but got : " << val7 << endl;
+    }
+
+    if (val8 != "Zulu")
+    {
+        cout << "Incorrect get result. Expected \"Zulu\" but got : " << val8 << endl;
+    }
+
+    if (val9 != "Hotel")
+    {
+        cout << "Incorrect get result. Expected \"Hotel\" but got : " << val9 << endl;
+    }
     }
 
     catch (exception &e) {
-    // expect an underflow error
     cout << "Correctly caught error trying to get key 124 from bst: "
          << e.what() << endl;
     }
 }
 
+void test_remove()
+{
+    try
+    {
+        int vals[15] = {4, 9, 0, 2, 3, 53, 73, 1, 34, 5, 19, 34, 91, 102, 23};
+        BST<string, int> balanced_bst;
+        for (int i = 0; i < 15; i++)
+        {
+            balanced_bst.insert("foobar", vals[i]);
+        }
+
+        balanced_bst.remove(34);
+        balanced_bst.remove(9);
+        balanced_bst.remove(4);
+        balanced_bst.remove(2);
+        balanced_bst.remove(3);
+        balanced_bst.remove(5);
+        string bst_str = balanced_bst.to_string();
+        if (bst_str != "19 0 53 1 34 73 23 91 102")
+        {
+            cout << "Incorrect result of removing 34, 9, 4, 2, 3, and 5. Expected 19 0 53 1 34 73 23 91 102 but got : " << bst_str << endl;
+        }
+
+        balanced_bst.remove(0);
+        balanced_bst.remove(34);
+        balanced_bst.remove(1);
+        balanced_bst.remove(23);
+        balanced_bst.remove(102);
+        balanced_bst.remove(19);
+        balanced_bst.remove(53);
+        balanced_bst.remove(91);
+        balanced_bst.remove(73);
+
+        bst_str = balanced_bst.to_string();
+
+        if (bst_str != "") 
+        {
+            cout << "Incorrect result of removing 0, 34, 1, 23, 102, 19, 53, 91, and 73. Expected an empty list but got : " << bst_str << endl;
+        }
+
+        if (!balanced_bst.empty())
+        {
+            cout << "balanced_bst is incorrectly identified as non-empty." << endl;
+        }
+    }
+    catch (exception &e)
+    {
+        cerr << "Correctly identified error; can't remove key from an empty tree." << e.what() << endl;
+    }
+}
+
+void test_max_data()
+{
+    try
+    {
+        int vals[10] = {1203, 1267, 13459, 2496, 28456, 325864, 926, 2450, 6769, 2456};
+        BST<string, int> balanced_bst;
+
+        balanced_bst.insert("Alfa", vals[0]);
+        balanced_bst.insert("Bravo", vals[1]);
+        balanced_bst.insert("Charlie", vals[2]);
+        balanced_bst.insert("Delta", vals[3]);
+        balanced_bst.insert("Echo", vals[4]);
+        balanced_bst.insert("Foxtrot", vals[5]);
+        balanced_bst.insert("Golf", vals[6]);
+        balanced_bst.insert("Hotel", vals[7]);
+        balanced_bst.insert("India", vals[8]);
+        balanced_bst.insert("Juliett", vals[9]);
+
+        
+        string max_str = balanced_bst.max_data();
+        if (max_str != "Foxtrot")
+        {
+            cout << "Incorrect result of max_data. Expected \"Foxtrot\" but got : " << max_str << endl;
+        }
+
+        balanced_bst.remove(325864);
+
+        string max_str2 = balanced_bst.max_data();
+        if (max_str2 != "Echo")
+        {
+            cout << "Incorrect result of max_data. Expected \"Echo\" but got : " << max_str2 << endl;
+        }
+
+        balanced_bst.remove(28456);
+        string max_str3 = balanced_bst.max_data();
+        if (max_str3 != "Charlie")
+        {
+            cout << "Incorrect result of max_data. Expected \"Charlie\" but got : " << max_str3 << endl;
+        }
+
+        balanced_bst.remove(13459);
+        string max_str4 = balanced_bst.max_data();
+        if (max_str4 != "India")
+        {
+            cout << "Incorrect result of max_data. Expected \"India\" but got : " << max_str4 << endl;
+        }
+
+        balanced_bst.remove(6769);
+        string max_str5 = balanced_bst.max_data();
+        if (max_str5 != "Delta")
+        {
+            cout << "Incorrect result of max_data. Expected \"Delta\" but got : " << max_str5 << endl;
+        }
+
+        string min_str = balanced_bst.min_data();
+        if (min_str != "Golf")
+        {
+            cout << "Incorrect result of min_data. Expected \"Golf\" but got : " << min_str << endl;
+        }
+
+        balanced_bst.remove(926);
+        string min_str2 = balanced_bst.min_data();
+        if (min_str2 != "Alfa")
+        {
+            cout << "Incorrect result of min_data. Expected \"Alfa\" but got : " << min_str2 << endl;
+        }
+
+    }
+    catch (exception &e)
+    {
+        cerr << "Error in determining data of max node in bst : " << e.what() << endl;
+    }
+}
 
 int main()
 {
@@ -170,10 +335,9 @@ int main()
     test_insert_CS_classes();
     test_insert_long();
     test_get();
-    // test_remove();
-    // test_max_data();
+    test_remove();
+    test_max_data();
     // test_max_key();
-    // test_min_data();
     // test_min_key();
     // test_successor();
     // test_in_order();
