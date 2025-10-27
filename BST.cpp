@@ -381,13 +381,13 @@ void BST<D, K>::transplant(Node* u, Node* v) {
 // inorder_tree_walk
 //===========================================
 template <typename D, typename K>
-std::string BST<D, K>::inorder_tree_walk(Node* x) {
+string BST<D, K>::inorder_tree_walk(Node* x) {
 
     if (x == nullptr) return ""; // base case
 
-    std::string left  = inorder_tree_walk(x->left); // traverse left subtree
-    std::string mid   = std::to_string(x->key) + " "; // add current node's key
-    std::string right = inorder_tree_walk(x->right); // traverse right subtree
+    string left  = inorder_tree_walk(x->left); // traverse left subtree
+    string mid   = std::to_string(x->key) + " "; // add current node's key
+    string right = inorder_tree_walk(x->right); // traverse right subtree
 
     return left + mid + right; // concatenate results
 
