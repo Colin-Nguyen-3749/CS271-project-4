@@ -431,7 +431,6 @@ int main()
     test_remove();
     test_max_data();
     test_max_key();
-    // test_min_key();
     // test_successor();
     // test_in_order();
     // test_trim();
