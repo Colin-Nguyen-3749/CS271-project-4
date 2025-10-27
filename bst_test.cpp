@@ -324,6 +324,45 @@ void test_max_data()
     }
 }
 
+void test_min_key()
+{
+    try
+    {
+        int vals[10] = {5, 2, 7, 1, 3, 4, 6, 9, 8, 10};
+        BST<string, int> balanced_bst;
+        for (int i = 0; i < 10; i++)
+        {
+            balanced_bst.insert(to_string(vals[i]) + " data", vals[i]);
+        }
+        int min_k = balanced_bst.min_key();
+        if (min_k != 1)
+        {
+            cout << "Incorrect result of min_key. Expected 1 but got : " << min_k << endl;
+        }
+
+        balanced_bst.remove(1);
+        balanced_bst.insert("Pick me", 0);
+
+        int min_k2 = balanced_bst.min_key();
+        if (min_k != 0)
+        {
+            cout << "Incorrect result of min_key. Expected 0 but got : " << min_k << endl;
+        }
+
+        string min_str = balanced_bst.min_data();
+        if (min_str != "Pick me")
+        {
+            cout << "Incorrect result of min_data. Expected \"Pick me\" but got : " << min_str << endl;
+        }
+
+
+    }
+    catch (exception &e)
+    {
+        cerr << "Error in determining key of min node in bst : " << e.what() << endl;
+    }
+}
+
 int main()
 {
 
