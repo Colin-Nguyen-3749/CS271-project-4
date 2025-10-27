@@ -407,3 +407,49 @@ vector<typename BST<D, K>::Node*> BST<D, K>::arrayify(Node* x, vector<Node*>& no
 
     return nodes; // return the populated vector
 }
+
+//===========================================
+// assignment operator
+//===========================================
+template <typename D, typename K>
+BST<D, K> BST<D, K>::operator= (const BST<D, K> &myBST) {
+    Node *fromPtr;
+	Node *toPtr;
+	Node *thisPtr;
+
+    if ( root == nullptr ) {
+        toPtr->left = nullptr;
+        toPtr->right = nullptr;
+        toPtr->parent = nullptr;
+	}
+
+    fromPtr = myBST->root;
+    root = new Node;
+    toPtr = root;
+
+    toPtr->key = fromPtr->key;
+    toPtr->val = fromPtr->val;
+
+    int checkKeys = 1;
+    int toAdd = 0; // initialize our tracking variables
+
+    while(checkKeys != 0) { // while there are still nodes to process
+         
+        toAdd = checkKeys; // number of nodes to remove at this level
+        checkKeys = 0; // reset checkKeys for the next level
+        
+        while (toAdd != 0) { // process all nodes at this level
+            if (fromPtr->left != nullptr) {
+                checkKeys++;
+                fromPtr->val = toPtr->val;
+                fromPtr->key = toPtr->key;
+            } // if left child exists, add to queue
+            if (fromPtr->right != nullptr) {
+                checkKeys++;
+                fromPtr->val = toPtr->val;
+                fromPtr->key = toPtr->key;
+            } // if right child exists, add to queue
+        } 
+    }
+
+}
