@@ -55,6 +55,8 @@ class BST {
     std::string inorder_tree_walk(Node* x);
     vector<Node*> arrayify(Node* x, vector<Node*>& nodes);
     void transplant(Node* u, Node* v);
+    BST<D, K> operator= (const BST<D, K>& myBST);
+
 
     std::string to_string (void) const;
 
