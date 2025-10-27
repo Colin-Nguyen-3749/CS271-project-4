@@ -469,6 +469,29 @@ void test_successor()
     }
 }
 
+
+void test_in_order()
+{
+    try
+    {
+        int vals[10] = {1001, 1006, 1010, 1023, 1004, 1008, 1009, 1011, 1054, 1065};
+        BST<string, int> balanced_bst;
+        for (int i = 0; i < 10; i++)
+        {
+            balanced_bst.insert("some data", vals[i]);
+        }
+        string bst_str = balanced_bst.in_order();
+        if (bst_str != "1001 1004 1006 1008 1009 1010 1011 1023 1054 1065 ")
+        {
+            cout << "Incorrect in_order result after inserting keys {1001, 1006, 1010, 1023, 1004, 1008, 1009, 1011, 1054, 1065}. Expected 1001 1004 1006 1008 1009 1010 1011 1023 1054 1065 but got : " << bst_str << endl;
+        }
+    }
+    catch (exception &e)
+    {
+        cerr << "Error getting keys in_order from bst : " << e.what() << endl;
+    }
+}
+
 int main()
 {
 
@@ -486,7 +509,7 @@ int main()
     test_max_data();
     test_max_key();
     test_successor();
-    // test_in_order();
+    test_in_order();
     // test_trim();
     // // test_binhex();
 
