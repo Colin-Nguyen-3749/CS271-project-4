@@ -363,6 +363,58 @@ void test_min_key()
     }
 }
 
+void test_max_key()
+{
+    try
+    {
+        int vals[20] = {78, 90, 34, 75, 86, 23, 89, 14, 10, 100, 15, 12, 54, 65, 11, 17, 18, 19, 0, 13};
+        BST<string, int> balanced_bst;
+        for (int i = 0; i < 20; i++)
+        {
+            balanced_bst.insert(to_string(vals[i]) + " data", vals[i]);
+        }
+        int max_k = balanced_bst.max_key();
+        if (max_k != 100)
+        {
+            cout << "Incorrect result of max_key. Expected 100 but got : " << max_k << endl;
+        }
+
+        balanced_bst.remove(100);
+
+        int max_k2 = balanced_bst.max_key();
+        if (max_k2 != 90)
+        {
+            cout << "Incorrect result of max_key. Expected 90 but got : " << max_k2 << endl;
+        }
+
+        string max_str = balanced_bst.max_data();
+        if (max_str != "90 data")
+        {
+            cout << "Incorrect result of max_data. Expected \"90 data\" but got : " << max_str << endl;
+        }
+
+        balanced_bst.insert("Pick me", 2025);
+
+        int max_k3 = balanced_bst.max_key();
+        if (max_k3 != 2025)
+        {
+            cout << "Incorrect result of max_key. Expected 2025 but got : " << max_k3 << endl;
+        }  
+        
+        string max_str4 = balanced_bst.max_data();
+        if (max_str4 != "Pick me")
+        {
+            cout << "Incorrect result of max_key. Expected \"Pick me\" but got : " << max_str4 << endl;
+        }  
+
+
+    }
+    catch (exception &e)
+    {
+        cerr << "Error in determining key of min node in bst : " << e.what() << endl;
+    }
+}
+
 int main()
 {
 
@@ -371,12 +423,14 @@ int main()
          << "Running tests for " << file_name << endl
          << endl;
 
+    // many of these tests are multi-faceted in that 
+    // they test multiple functions at once 
     test_insert_CS_classes();
     test_insert_long();
     test_get();
     test_remove();
     test_max_data();
-    // test_max_key();
+    test_max_key();
     // test_min_key();
     // test_successor();
     // test_in_order();
