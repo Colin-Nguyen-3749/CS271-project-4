@@ -18,7 +18,7 @@ using namespace std;
 template <typename D, typename K>
 BST<D, K>* create_bst (string fname) {
 
-    BST<D, K> bst;
+    BST<D, K>* bst = new BST<D, K>();
 
     ifstream file(fname);
     if (!file.is_open()) {
@@ -35,13 +35,13 @@ BST<D, K>* create_bst (string fname) {
         getline(ss, binary, '\n');
 
         // Insert the values into the BST
-        bst.insert(hexStr, binary);
+        bst->insert(hexStr, binary);
 
     }
 
     file.close();
 
-    BST<D, K>* treePtr = &bst;
+    BST<D, K>* treePtr = bst;
 
     return treePtr;
 
@@ -57,7 +57,7 @@ string convert(BST<D,K>* bst, string bin) {
     string hexConversion;
 
     for (int i = 0; i < bin.length(); i += 4) {
-        string fourbit = bin.substr(i, i+3);
+        string fourbit = bin.substr(i, 4);
         hexConversion += bst->get(fourbit);
     } // gather every 4-bit denomination using it as the key, add its data to the conversion
 
@@ -69,7 +69,7 @@ int main () {
 
     BST<string, string>* conversionTable = create_bst<string, string> ("binhex.txt");
 
-    cout << conversionTable->to_string();
+    cout << conversionTable->to_string() << endl;
 
     cout << "Enter binary representation for conversion: ";
 
