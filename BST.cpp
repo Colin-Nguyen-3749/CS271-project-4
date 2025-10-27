@@ -337,9 +337,7 @@ std::string BST<D, K>::to_string(void) const {
         while (toRemove !=0) { // process all nodes at this level
             Node* x = myQueue.front(); // get the front node
 
-            //==========ERROR======================================
             s << x->key << " "; // add its key to the stringstream
-            //==========ERROR======================================
 
             if (x->left != nullptr) {
                 checkKeys++;
