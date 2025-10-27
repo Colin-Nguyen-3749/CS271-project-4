@@ -415,6 +415,48 @@ void test_max_key()
     }
 }
 
+void test_successor()
+{
+    try
+    {
+        int vals[10] = {30, 23, 27, 45, 50, 120, 90, 14, 65, 78};
+        BST<string, int> balanced_bst;
+        for (int i = 0; i < 10; i++)
+        {
+            balanced_bst.insert(to_string(vals[i]) + " data", vals[i]);
+        }
+        int succ = balanced_bst.successor(23);
+        if (succ != 27)
+        {
+            cout << "Incorrect result of successor of 23. Expected 27 but got : " << succ << endl;
+        }
+
+        balanced_bst.remove(27);
+        succ = balanced_bst.successor(23);
+        if (succ != 30)
+        {
+            cout << "Incorrect result of successor of 23. Expected 30 but got : " << succ << endl;
+        }
+
+        balanced_bst.insert("28 data", 28);
+        succ = balanced_bst.successor(23);
+        if (succ != 28)
+        {
+            cout << "Incorrect result of successor of 23. Expected 28 but got : " << succ << endl;
+        }
+
+        succ = balanced_bst.successor(120);
+        if (succ != 0)
+        {
+            cout << "Incorrect result of successor of 120. Expected 0 but got : " << succ << endl;
+        }
+    }
+    catch (exception &e)
+    {
+        cerr << "Error in determining successor in bst : " << e.what() << endl;
+    }
+}
+
 int main()
 {
 
@@ -431,7 +473,7 @@ int main()
     test_remove();
     test_max_data();
     test_max_key();
-    // test_successor();
+    test_successor();
     // test_in_order();
     // test_trim();
     // // test_binhex();
