@@ -49,10 +49,17 @@ template <typename D, typename K>
 string convert(BST<D,K>* bst, string bin) {
 
     while (bin.length() % 4 != 0) {
+        bin = "0" + bin;
+    } // ensure that bin length is a multiple of 4 by padding the front with 0's.
 
+    string hexConversion;
 
-        
-    }
+    for (int i = 0; i < bin.length(); i += 4) {
+        string 4bit = bin.substr(i, i+3);
+        hexConversion += bst.get(4bit);
+    } // gather every 4-bit denomination using it as the key, add its data to the conversion
+
+    return hexConversion; // return the conversion
 
 }
 
@@ -62,7 +69,12 @@ int main () {
 
     conversionTable = create_bst<char, string> ("binhex.txt");
 
-    
+    cout << "Enter binary representation for conversion: ";
+
+    string binary;
+    cin >> binary;
+
+    cout << "Hexadecimal representation of " << binary << " is " << convert<char, string> (conversionTable, binary) << endl;
 
     return 0;
 }
