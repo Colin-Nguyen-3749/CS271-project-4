@@ -450,10 +450,22 @@ void test_successor()
         {
             cout << "Incorrect result of successor of 120. Expected 0 but got : " << succ << endl;
         }
+
+        balanced_bst.remove(30);
+        balanced_bst.remove(23);
+        balanced_bst.remove(28);
+        balanced_bst.remove(45);
+        balanced_bst.remove(50);
+        balanced_bst.remove(120);
+        balanced_bst.remove(90);
+        balanced_bst.remove(14);
+        balanced_bst.remove(65);
+        balanced_bst.remove(78);
+        succ = balanced_bst.successor(120);
     }
     catch (exception &e)
     {
-        cerr << "Error in determining successor in bst : " << e.what() << endl;
+        cerr << "Correctly identified error in determining successor in empty bst : " << e.what() << endl;
     }
 }
 
