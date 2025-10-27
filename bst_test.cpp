@@ -84,11 +84,77 @@ void test_insert_long()
         if (bst_str != "1583124523 13479128 17429 1098173849 14307 8901726 134563647 3291 1063801 23491235 983147 1349807 92379852 54876 23487 314987 909735")
         {
             cout << "Incorrect result of inserting keys in order. Expected 1583124523 13479128 17429 1098173849 14307 8901726 134563647 1063801 983147 1349807 54876 23487 314987 909735 but got : " << bst_str << endl;
+        } 
+
+        if (bst.empty())
+        {
+            cout << "bst_string is incorrectly identified as non-empty." << endl;
         }
-    }
+
+  }
+
     catch (exception &e)
     {
         cerr << "Error inserting into bst : " << e.what() << endl;
+    }
+}
+
+void test_get()
+{
+    try {
+    BST<string, int> bst;
+    bst.insert("Alfa", 13);
+    bst.insert("Bravo", 1);
+    bst.insert("Charlie", 7);
+    bst.insert("Delta", 2);
+    bst.insert("Echo", 19);
+    bst.insert("Foxtrot", 21);
+    bst.insert("Golf", 9);
+    bst.insert("Hotel", 12);
+    bst.insert("India", 14);
+    bst.insert("Juliett", 18);
+    bst.insert("Kilo", 3);
+    bst.insert("Lima", 13);
+    bst.insert("Mike", 17);
+    bst.insert("November", 5);
+    bst.insert("Oscar", 16);
+    bst.insert("Papa", 15);
+    bst.insert("Quebec", 10);
+    bst.insert("Romeo", 128);
+    bst.insert("Sierra", 192);
+    bst.insert("Tango", 1238);
+    bst.insert("Uniform", 127);
+    bst.insert("Victor", 97);
+    bst.insert("Whiskey", 0);
+    bst.insert("XRay", 24);
+    bst.insert("Yankee", 8);
+    bst.insert("Zulu", 158);
+
+    string val0 = bst.get(1);
+    string val1 = bst.get(192);
+    string val2 = bst.get(1238);
+    string val4 = bst.get(124);
+
+    if (val0 != "Bravo")
+        {
+            cout << "Incorrect get result. Expected \"Bravo\" but got : " << val0 << endl;
+        }
+
+    if (val1 != "Sierra")
+    {
+        cout << "Incorrect get result. Expected \"Sierra\" but got : " << val1 << endl;
+    }
+
+    if (val2 != "Tango")
+    {
+        cout << "Incorrect get result. Expected \"Tango\" but got : " << val2 << endl;
+    }
+    }
+
+    catch (exception &e) {
+    // expect an underflow error
+    cout << "Correctly caught error trying to get key 124 from bst: "
+         << e.what() << endl;
     }
 }
 
@@ -101,10 +167,9 @@ int main()
          << "Running tests for " << file_name << endl
          << endl;
 
-    // test_empty();
     test_insert_CS_classes();
     test_insert_long();
-    // test_get();
+    test_get();
     // test_remove();
     // test_max_data();
     // test_max_key();
