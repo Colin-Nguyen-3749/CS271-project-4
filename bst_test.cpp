@@ -470,25 +470,71 @@ void test_successor()
 }
 
 
-void test_in_order()
+void test_in_order_20()
 {
     try
     {
-        int vals[10] = {1001, 1006, 1010, 1023, 1004, 1008, 1009, 1011, 1054, 1065};
+        int vals[20] = {1001, 1006, 1010, 1023, 1004, 1008, 1009, 1011, 1054, 1065, 1073, 1083, 1098, 1014, 1051, 1076, 1089, 1045, 1057, 1029};
         BST<string, int> balanced_bst;
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 20; i++)
         {
             balanced_bst.insert("some data", vals[i]);
         }
         string bst_str = balanced_bst.in_order();
-        if (bst_str != "1001 1004 1006 1008 1009 1010 1011 1023 1054 1065 ")
+        if (bst_str != "1001 1004 1006 1008 1009 1010 1011 1014 1023 1029 1045 1051 1054 1057 1065 1073 1076 1083 1089 1098 ")
         {
-            cout << "Incorrect in_order result after inserting keys {1001, 1006, 1010, 1023, 1004, 1008, 1009, 1011, 1054, 1065}. Expected 1001 1004 1006 1008 1009 1010 1011 1023 1054 1065 but got : " << bst_str << endl;
+            cout << "Incorrect in_order result after inserting keys {1001, 1006, 1010, 1023, 1004, 1008, 1009, 1011, 1054, 1065, 1073, 1083, 1098," 
+            << "1014, 1051, 1076, 1089, 1045, 1057, 1029}. Expected 1001 1004 1006 1008 1009 1010 1011 1014 1023 1029 1045 1051 1054 1057 1065 1073" 
+            << "1076 1083 1089 1098 but got : " << bst_str << endl;
         }
+
+        
     }
     catch (exception &e)
     {
         cerr << "Error getting keys in_order from bst : " << e.what() << endl;
+    }
+}
+
+void test_trim()
+{
+    try
+    {
+        int vals[20] = {1001, 1006, 1010, 1023, 1004, 1008, 1009, 1011, 1054, 1065, 1073, 1083, 1098, 1014, 1051, 1076, 1089, 1045, 1057, 1029};
+        BST<string, int> bst;
+        for (int i = 0; i < 20; i++)
+        {
+            bst.insert("some data", vals[i]);
+        }
+        bst.trim(1003, 1050);
+        string bst_str = bst.to_string();
+        if (bst_str != "1006 1004 1010 1008 1023 1009 1011 1045 1014 1029")
+        {
+            cout << "Incorrect tree after trimming with low 1003, high=1050. Expected 1006 1004 1010 1008 1023 1009 1011 1045 1014 1029 but got : " << bst_str << endl;
+        }
+
+        // trimming an empty bst
+        BST<string, int> bst2;
+        int vals2[0] = {};
+        bst2.trim(1, 12);
+        bst_str = bst2.to_string();
+
+        BST<string, int> bst3;
+        int vals3[5] = {3, 0, 4, 2, 1};
+        for (int i = 0; i < 5; i++)
+        {
+            bst3.insert(to_string(vals2[i]) + " data", vals2[i]);
+        }
+        bst3.trim(1, 11);
+        bst_str = bst2.to_string();
+        if (bst_str != "")
+        {
+            cout << "Incorrect tree after trimming with low=1, high=11. Expected \" \" but got : " << bst_str << endl;
+        }
+    }
+    catch (exception &e)
+    {
+        cerr << "Correctly identified error in trimming an empty bst" << e.what() << endl;
     }
 }
 
@@ -509,9 +555,8 @@ int main()
     test_max_data();
     test_max_key();
     test_successor();
-    test_in_order();
-    // test_trim();
-    // // test_binhex();
+    test_in_order_20();
+    test_trim();
 
     cout << "Testing completed" << endl;
 
