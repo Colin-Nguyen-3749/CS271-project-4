@@ -490,6 +490,20 @@ void test_in_order_20()
             << "1076 1083 1089 1098 but got : " << bst_str << endl;
         }
 
+        balanced_bst.remove(1001);
+        balanced_bst.remove(1023);
+        balanced_bst.remove(1083);
+        balanced_bst.remove(1004);
+        balanced_bst.remove(1051);
+
+        bst_str = balanced_bst.in_order();
+        if (bst_str != "1006 1008 1009 1010 1011 1014 1029 1045 1054 1057 1065 1073 1076 1089 1098 ")
+        {
+            cout << "Incorrect in_order result after inserting keys {1006, 1010, 1008, 1009, 1011, 1054, 1065, 1073, 1098," 
+            << "1014, 1076, 1089, 1045, 1057, 1029}. Expected 1006 1008 1009 1010 1011 1014 1029 1045 1054 1057 1065 1073 1076 1089 1098" 
+            << "1076 1083 1089 1098 but got : " << bst_str << endl;
+        }
+
         
     }
     catch (exception &e)
