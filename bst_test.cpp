@@ -9,6 +9,8 @@
 #include <stdlib.h>
 #include <iostream>
 #include <math.h>
+#include <cstdlib> 
+#include <ctime>
 #include "BST.h"
 
 using namespace std;
@@ -523,14 +525,15 @@ void test_trim()
         int vals3[5] = {3, 0, 4, 2, 1};
         for (int i = 0; i < 5; i++)
         {
-            bst3.insert(to_string(vals2[i]) + " data", vals2[i]);
+            bst3.insert(to_string(vals3[i]) + " data", vals3[i]);
         }
-        bst3.trim(1, 11);
-        bst_str = bst2.to_string();
+        bst3.trim(18, 31);
+        bst_str = bst3.to_string();
         if (bst_str != "")
         {
-            cout << "Incorrect tree after trimming with low=1, high=11. Expected \" \" but got : " << bst_str << endl;
+            cout << "Incorrect tree after trimming with low=0, high=11. Expected \" \" but got : " << bst_str << endl;
         }
+
     }
     catch (exception &e)
     {
